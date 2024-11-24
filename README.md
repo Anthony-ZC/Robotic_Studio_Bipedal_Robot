@@ -3,6 +3,10 @@ By **Zewen "Anthony" Chen** and **Xinhe "Carl" Yang** Columbia University
 
 
 ### Project 
+- **Project Video**
+  - [x] Playlist Link
+  - [ ] Journal Video Link
+
 - **CAD**
   - [ ] CAD Link
   - [ ] Structure Explanation
@@ -11,10 +15,6 @@ By **Zewen "Anthony" Chen** and **Xinhe "Carl" Yang** Columbia University
   - [ ] 3MF
   - [ ] MarkerWorld Link
   - [ ] 3D-Printing Guidance
-  
-- **Video**
-  - [x] Playlist Link
-  - [ ] Journal Video Link
 
 - **Control Code**
   - [x] Main Control Code Implementation
