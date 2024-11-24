@@ -1,7 +1,21 @@
 # Robot_Studio
-Columbia Robot Studio Project: CAD,  3mf, Control Code, Simulation Code, 
+Columbia Robot Studio Lecture 2024 Fall 
+Project
 
 ### 项目内容
+- **CAD**
+  - [ ] CAD Link
+  - [ ] Structure Explanation
+
+- **3MF**
+  - [ ] 3MF
+  - [ ] MarkerWorld Link
+  - [ ] 3D-Printing Guidance
+  
+- **Video**
+  - [x] Playlist Link
+  - [ ] Journal Video Link
+
 - **Control Code**
   - [x] Main Control Code Implementation
   - [ ] Code Node
@@ -13,11 +27,3 @@ Columbia Robot Studio Project: CAD,  3mf, Control Code, Simulation Code,
   - [ ] Physical Properties
   - [ ] Simulation Code
 
-- **CAD**
-  - [ ] CAD Link
-  - [ ] Structure Explanation
-
-- **3MF**
-  - [ ] 3MF
-  - [ ] MarkerWorld Link
-  - [ ] 3D-Printing Guidance
