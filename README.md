@@ -1,8 +1,8 @@
-# Robot_Studio
-Columbia Robot Studio Lecture 2024 Fall 
-Project
+# Robot Studio (2024 Fall )Full Project Implementation
+By **Zewen "Anthony" Chen** and **Xinhe "Carl" Yang** Columbia University
 
-### 项目内容
+
+### Project 
 - **CAD**
   - [ ] CAD Link
   - [ ] Structure Explanation
