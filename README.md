@@ -5,8 +5,7 @@ By **Zewen "Anthony" Chen** and **Xinhe "Carl" Yang** Columbia University
 ### Project 
 - **Project Video**
   - [x] Playlist Link https://www.youtube.com/playlist?list=PLH_mFWdIEgZGXP19iW7NsymILhA3eG9Pi
-  - [x] Journal Video Link [![YouTube](http://i.ytimg.com/vi/UUYPjQSJz8M/hqdefault.jpg)](https://www.youtube.com/watch?v=UUYPjQSJz8M)
-
+  - [x] Journal Video Link https://www.youtube.com/watch?v=UUYPjQSJz8M
 - **CAD**
   - [ ] CAD Link
   - [ ] Structure Explanation
