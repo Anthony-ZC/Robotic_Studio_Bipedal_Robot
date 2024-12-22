@@ -14,7 +14,7 @@ Anthony Chen
 
 - **Project Video**  
   - [x] Playlist Link: [https://www.youtube.com/playlist?list=PLH_mFWdIEgZGXP19iW7NsymILhA3eG9Pi](https://www.youtube.com/playlist?list=PLH_mFWdIEgZGXP19iW7NsymILhA3eG9Pi)  
-  - [x] Journey Video: 
+  - [x] Journey Video:  
   [![Watch the video](https://img.youtube.com/vi/UUYPjQSJz8M/hqdefault.jpg)](https://www.youtube.com/watch?v=UUYPjQSJz8M) 
 
 - **CAD**  
@@ -26,16 +26,16 @@ Anthony Chen
   - [x] MarkerWorld Link: [https://makerworld.com/zh/models/903789#profileId-863432](https://makerworld.com/zh/models/903789#profileId-863432)  
 
 - **Assembly Guidance**  
-  - [x] [Essential Parts Links](#essential-parts-links)  
-  - [x] [Assembly Tips](#assembly-tips)
+  - [x] [Purchase Links for Essential Parts](#purchase-links-for-essential-parts)  
+  - [x] [Additional Assembly Information](#additional-assembly-information)
   - [ ] Assembly Video in CAD  
-  Probably won't do it anytime soon, I think a good robotics engineer should be capable of analyzing and assembling this robot.(Or just because I am lazy.) But if enough requests are posted in issues, perhaps I'll make it.
+  Probably won't do it anytime soon, I think a good robotics engineer should be capable of analyzing and assembling this robot (or just because I am lazy >_<). But if enough requests are posted in issues, perhaps I'll make it.
 
 - [**Control Code**](#control-code)
   - [x] [Requirements](#requirements)
-  - [x] Testing Code
+  - [x] [Testing Code](#testing-code)
+  - [x] [Servo Curve Analysis](#servo-curve-analysis)
   - [x] Integrated Control Code
-  - [ ] Servo Curve Analysis
 
 - **Simulation Code**
   - [ ] STL
@@ -44,10 +44,7 @@ Anthony Chen
   - [ ] Simulation Code
 ---
 ### Assembly Guidance
-#### Essential Parts Links  
-
-Here is a directory of purchase links for essential parts:  
-
+#### Purchase Links for Essential Parts
 - **Amazon**  
   - <u>**7**</u> [LX-16A Serial Bus Servo](https://www.amazon.com/Hiwonder-LX-16A-Robotic-Controller-Control/dp/B073XY5NT1) 
   - [Additional LX-16A Serial Bus Servo](https://www.amazon.com/LewanSoul-Real-Time-Feedback-Bearing-Brackets/dp/B0748BQ49M) (for those who do not take the lecture)
@@ -76,12 +73,14 @@ Here is a directory of purchase links for essential parts:
   - <u>**1 pkg**</u> [Medium-Strength, Class 8, M2 x 0.4 mm Thread, Zinc-Plated Steel Hex Nut](https://www.mcmaster.com/90591A265/)  
   - <u>**1 pkg**</u> [M2 x 0.4 mm Thread Size, 2.9 mm Installed Length, Brass Tapered Heat-Set Inserts for Plastic](https://www.mcmaster.com/94180A307/)  
   - <u>**4**</u> [3 mm Shoulder Diameter, 25 mm Shoulder Length, M2 x 0.4 mm Thread Alloy Steel Shoulder Screws](https://www.mcmaster.com/92981A775/)  
-#### Assembly Tips 
+#### Additional Assembly Information 
   - For 3D-printed "Robot_Cover" part, you need to do **thermal insert** through the soldering iron.
   - For "Cylinder_Pi" and "Cylinder_DC_Converter" parts in CAD, **do not 3D print it**, use [M2 studs](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) above instead. We have tried 3D print studs with thermal inserts but failed, that's why they are not included in 3D Printing files.
   - In Solidworks CAD, you may see **Internal-Tooth Lock Washer** for mating convenience in Solidworks. However, you can use other less damaging lock washers like [Split Lock Washer](https://www.mcmaster.com/92148A050/) instead.
   - For "Raspberry_Pi_Platform" part, you can use **laser cut acrylic sheets** to get it instead of 3D printing
   - Although the screws that connect the **"Raspberry Pi"**, the **"Raspberry_Pi_Platform"**, the **"Servo_Connector_Head""**, and the **"studs that hold the DC converter"** in place in CAD do not use a **lock washer,** it is highly recommended that you use one in order to prevent parts from falling out of place during the robot's motion.
+  - **Very Important!** Make sure you print two legs using **same filaments**, or the robot might hard to balance (like [this](https://youtu.be/c0_l959v7TQ?si=rPd1EVJWCl6EjpbT)).
+  - Although the 8cm shorter upper legs are included in this project and the [simulation](https://youtu.be/Yh0ZwXFP5J8?si=DioH9wF-7lgsMUER) shows it somehow better, we failed to make the robot walk using them. But, you can try.
 ---
 
 ### Control Code  
@@ -89,14 +88,16 @@ Here is a directory of purchase links for essential parts:
  - Python 3.10.15+ (To install PyLX-16A package, you must use a Python environment with 3.10 or newer version.)
  - [PyLX-16A](https://github.com/ethanlipson/PyLX-16A/tree/master) 
  - Numpy 2.1.3+
- - pyserial 3.5+
+ - Pyserial 3.5+
  - PyQt6 6.7.1+ (for visual debugging on windows, **cannot process on RasoberryPi**)
- - speech_recognition (for voice recognition)
+ - SpeechRecognition (for voice recognition)
  - Pygame (for screen facial expression)
 #### Testing Code
- - servo-test.py  
+ - **servo-test.py**  
     Visualized servo adjusting code.
- - test_hello-world.py  
+ - **test_hello-world.py**  
     3 servos sinusoidal testing code.
-
+#### Servo Curve Analysis
+ - **servo_curve_visualization.py**
+    By setting the walk period and servo keyframes, you can plot the servo angle curves of preparation phase, periodic walk phase, and stop phase obtained by cubic polynomial interpolation. Accordingly you can check the servos for excessive overshooting and thus avoid violent shaking or damage to the robot.
 ---
