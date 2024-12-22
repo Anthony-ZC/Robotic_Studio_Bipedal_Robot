@@ -15,7 +15,7 @@ Anthony Chen
   - [x] Journey Video Link: [https://www.youtube.com/watch?v=UUYPjQSJz8M](https://www.youtube.com/watch?v=UUYPjQSJz8M)  
 
 - **CAD**  
-  - [x] CAD Link (GrabCAD): [https://grabcad.com/library/robotics-studio-bipedel-robot-1](https://grabcad.com/library/robotics-studio-bipedel-robot-1)  
+  - [x] CAD Link (GrabCAD): [https://grabcad.com/library/robotics-studio-bipedel-robot-1](https://grabcad.com/library/robotics-studio-bipedal-robot-1)  
 
 - **3D Printing**  
   - [x] [STL Files](./3D%20Printing/)  
