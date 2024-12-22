@@ -25,7 +25,8 @@ Anthony Chen
 - **Assembly Guidance**  
   - [x] [Essential Parts Links](#essential-parts-links)  
   - [x] [Assembly Tips](#assembly-tips)
-  - [ ] Assembly Video in CAD (probably won't have, but if any requirements posted in issue, I will make it)
+  - [ ] Assembly Video in CAD  
+  Probably won't do it anytime soon, I think a good robotics engineer should be capable of analyzing and assembling this robot.(Or just because I am lazy.) But if enough requests are posted in issues, perhaps I'll make it.
 
 - [**Control Code**](#control-code)
   - [x] [Requirements](#requirements)
@@ -46,7 +47,7 @@ Here is a directory of purchase links for essential parts:
 
 - **Amazon**  
   - <u>**7**</u> [LX-16A Serial Bus Servo](https://www.amazon.com/Hiwonder-LX-16A-Robotic-Controller-Control/dp/B073XY5NT1) 
-  - <u>**1**</u> [Additional LX-16A Serial Bus Servo](https://www.amazon.com/LewanSoul-Real-Time-Feedback-Bearing-Brackets/dp/B0748BQ49M) (for those who do not take the lecture)
+  - [Additional LX-16A Serial Bus Servo](https://www.amazon.com/LewanSoul-Real-Time-Feedback-Bearing-Brackets/dp/B0748BQ49M) (for those who do not take the lecture)
   - <u>**1**</u> [Battery Pack](https://www.amazon.com/dp/B01M7Z9Z1N) (You may use any other battery have DC 12V/5V USB dual output.)  
   <u>**Warning</u>: This battery may not be able to afford more than 8 servos.**
   - <u>**1**</u> [DC to DC Converter](https://www.amazon.com/gp/product/B00BYS9JYA)
@@ -74,10 +75,10 @@ Here is a directory of purchase links for essential parts:
   - <u>**4**</u> [3 mm Shoulder Diameter, 25 mm Shoulder Length, M2 x 0.4 mm Thread Alloy Steel Shoulder Screws](https://www.mcmaster.com/92981A775/)  
 #### Assembly Tips 
   - For 3D-printed "Robot_Cover" part, you need to do **thermal insert** through the soldering iron.
-  - For "Cylinder_Pi" and "Cylinder_DC_Converter" parts in CAD, **do not 3D print it**, use [M2 studs](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) above instead. We have try it and failed, that's why they are not include in 3D Printing files.
-  - In Solidworks CAD, you may see **Internal-Tooth Lock Washer** for mating convenience in Solidworks. However, you can use other less damaging lock washer like [Split Lock Washer](https://www.mcmaster.com/92148A050/) instead.
+  - For "Cylinder_Pi" and "Cylinder_DC_Converter" parts in CAD, **do not 3D print it**, use [M2 studs](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) above instead. We have tried 3D print studs with thermal inserts but failed, that's why they are not included in 3D Printing files.
+  - In Solidworks CAD, you may see **Internal-Tooth Lock Washer** for mating convenience in Solidworks. However, you can use other less damaging lock washers like [Split Lock Washer](https://www.mcmaster.com/92148A050/) instead.
   - For "Raspberry_Pi_Platform" part, you can use **laser cut acrylic sheets** to get it instead of 3D printing
-  - Although the screws that connect the **"Raspberry Pi"**, the **"Raspberry_Pi_Platform"**, the **""Servo_Connector_Head""**, and the **"studs that hold the DC converter"** in place in CAD do not use a **lock washer,** it is highly recommended that you use one in order to prevent parts from falling out of place during the robot's motion.
+  - Although the screws that connect the **"Raspberry Pi"**, the **"Raspberry_Pi_Platform"**, the **"Servo_Connector_Head""**, and the **"studs that hold the DC converter"** in place in CAD do not use a **lock washer,** it is highly recommended that you use one in order to prevent parts from falling out of place during the robot's motion.
 ---
 
 ### Control Code  
