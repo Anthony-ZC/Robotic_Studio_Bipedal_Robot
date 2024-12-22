@@ -1,4 +1,4 @@
-# Robot Studio (2024 Fall) Full Project Implementation  
+# Robot Studio: Bipeda Robot Full Project Implementation  
 It is a bipedal robot implementation for Columbia MECE 4611 Robotics Studio created by ***Zewen "Anthony" Chen*** and ***Xinhe "Carl" Yang*** (Fall 2024). We get inspiration by Yuhang Hu's work [CB-20](https://www.youtube.com/watch?v=Y0fBdpLf9ZI&t=1s) and redesign it.
 
 For those who attend Robotics Studio in the future or want to build their own first bipedal robot, I hope this implementation can help you. But remember, it is far from perfect. <u>**So, do not just copy it, make it better!**</u>  
@@ -6,13 +6,16 @@ For those who attend Robotics Studio in the future or want to build their own fi
 Best wishes,  
 Anthony Chen  
 
+<u>**You may use it for anything other than commercial purposes as long as the citation is noted.**</u>  
+
 ---
 
 ### Project Overview
 
 - **Project Video**  
   - [x] Playlist Link: [https://www.youtube.com/playlist?list=PLH_mFWdIEgZGXP19iW7NsymILhA3eG9Pi](https://www.youtube.com/playlist?list=PLH_mFWdIEgZGXP19iW7NsymILhA3eG9Pi)  
-  - [x] Journey Video Link: [https://www.youtube.com/watch?v=UUYPjQSJz8M](https://www.youtube.com/watch?v=UUYPjQSJz8M)  
+  - [x] Journey Video: 
+  [![Watch the video](https://img.youtube.com/vi/UUYPjQSJz8M/hqdefault.jpg)](https://www.youtube.com/watch?v=UUYPjQSJz8M) 
 
 - **CAD**  
   - [x] CAD Link (GrabCAD): [https://grabcad.com/library/robotics-studio-bipedel-robot-1](https://grabcad.com/library/robotics-studio-bipedal-robot-1)  
@@ -52,7 +55,7 @@ Here is a directory of purchase links for essential parts:
   <u>**Warning</u>: This battery may not be able to afford more than 8 servos.**
   - <u>**1**</u> [DC to DC Converter](https://www.amazon.com/gp/product/B00BYS9JYA)
   - <u>**1**</u> [Raspberry Pi 4](https://www.amazon.com/Raspberry-Model-2019-Quad-Bluetooth/dp/B07TD42S27?th=1)
-  - <u>**1**</u> [Micro SD Card (For Raspberry Pi system)](https://www.amazon.com/dp/B073JWXGNT?th=1)
+  - <u>**1**</u> [Micro SD Card ](https://www.amazon.com/dp/B073JWXGNT?th=1)(For Raspberry Pi system)
   - <u>**1**</u> [USB Male to USB C](https://www.amazon.com/Braided-Compatible-Samsung-Portable-Charger/dp/B07HQHL6ZK?th=1)
   - <u>**1**</u> [Raspberry Pi Touch Screen](https://www.amazon.com/dp/B0D4DL38MF?ref=ppx_yo2ov_dt_b_fed_asin_title)  
  <u>**Warning</u>: Please follow the driver installation guidance in the product description to enable it on Raspberry Pi. You may not be able to use  <u>HDMI</u> output if you enable the touch screen. If the touch screen does not work, please delete "LCD- show" floder and install it again.**
