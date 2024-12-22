@@ -1,5 +1,5 @@
 # Robot Studio (2024 Fall) Full Project Implementation  
-It is a bipedal robot Solidworks implementation for Columbia MECE 4611 Robotics Studio created by ***Zewen "Anthony" Chen*** and ***Xinhe "Carl" Yang*** (Fall 2024).
+It is a bipedal robot implementation for Columbia MECE 4611 Robotics Studio created by ***Zewen "Anthony" Chen*** and ***Xinhe "Carl" Yang*** (Fall 2024).
 
 For those who attend Robotics Studio in the future or want to build their own first bipedal robot, I hope this implementation can help you. But remember, it is far from perfect. **So, do not just copy it, make it better!**  
 
@@ -18,14 +18,14 @@ Anthony Chen
   - [x] CAD Link (GrabCAD): [https://grabcad.com/library/robotics-studio-bipedel-robot-1](https://grabcad.com/library/robotics-studio-bipedel-robot-1)  
 
 - **3D Printing**  
-  - [x] [STL Files]()  
-  - [x] 3MF File  
+  - [x] [STL Files](./3D%20Printing/)  
+  - [x] [3MF File](./3D%20Printing/Robot.3mf)  
   - [x] MarkerWorld Link: [https://makerworld.com/zh/models/903789#profileId-863432](https://makerworld.com/zh/models/903789#profileId-863432)  
 
 - **Assembly Guidance**  
   - [x] [Essential Parts Links](#essential-parts-links)  
-  - [ ] Assembly Tips  
-
+  - [ ] Assembly Tips
+  - [ ] Assembly Video in CAD (not sure to do...)
 
 - **Control Code**
   - [x] Main Control Code Implementation
