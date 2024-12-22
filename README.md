@@ -24,8 +24,8 @@ Anthony Chen
 
 - **Assembly Guidance**  
   - [x] [Essential Parts Links](#essential-parts-links)  
-  - [ ] Assembly Tips
-  - [ ] Assembly Video in CAD (not sure to do...)
+  - [x] [Assembly Tips](#assembly-tips)
+  - [ ] Assembly Video in CAD (probably won't have, but if needed in the future I will make it)
 
 - [**Control Code**](#control-code)
   - [x] [Requirements](#requirements)
@@ -39,33 +39,34 @@ Anthony Chen
   - [ ] Physical Properties
   - [ ] Simulation Code
 ---
-
-### Essential Parts Links  
+### Assembly Guidance
+#### Essential Parts Links  
 
 Here is a directory of purchase links for essential parts:  
 
 - **Amazon**  
-  - [LX-16A Serial Bus Servo](https://www.amazon.com/Hiwonder-LX-16A-Robotic-Controller-Control/dp/B073XY5NT1)  Quantity required: <u>**7**</u> 
-  - [Additional LX-16A Serial Bus Servo](https://www.amazon.com/LewanSoul-Real-Time-Feedback-Bearing-Brackets/dp/B0748BQ49M) 
-  - [Battery Pack](https://www.amazon.com/dp/B01M7Z9Z1N)  Quantity required: <u>**1**</u> (or any other battery have DC 12V/5V USB Dual Output) 
-  <u>**Warning</u>: This battery may not afford more than 8 servos**
-  - [DC to DC Converter](https://www.amazon.com/gp/product/B00BYS9JYA) Quantity required: <u>**1**</u>
-  - [Raspberry Pi 4](https://www.amazon.com/Raspberry-Model-2019-Quad-Bluetooth/dp/B07TD42S27?th=1) Quantity required: <u>**1**</u>
-  - [Micro SD Card (For Raspberry Pi system)](https://www.amazon.com/dp/B073JWXGNT?th=1) Quantity required: <u>**1**</u>
-  - [USB Male to USB C](https://www.amazon.com/Braided-Compatible-Samsung-Portable-Charger/dp/B07HQHL6ZK?th=1) Quantity required: <u>**1**</u>
-  - [Raspberry Pi Touch Screen](https://www.amazon.com/dp/B0D4DL38MF?ref=ppx_yo2ov_dt_b_fed_asin_title) Quantity required: <u>**1**</u> 
- <u>**Warning</u>: Please follow the driver installation guidance in the product to enable it on Raspberry Pi. You may not be able to use  <u>**HDMI</u> output if you install the driver. If it does not work, please delete "LCD- show" floder and install it again.**
-  - [USB 2.0 Mini Microphone](https://www.amazon.com/dp/B071WH7FC6?ref=ppx_yo2ov_dt_b_fed_asin_title) Quantity required: <u>**1**</u>
-  - [M2 Male Female Hex Brass Standoffs](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1)  Quantity required: <u>**1 pkg**</u>
+  - <u>**7**</u>x [LX-16A Serial Bus Servo](https://www.amazon.com/Hiwonder-LX-16A-Robotic-Controller-Control/dp/B073XY5NT1) 
+  - <u>**1**</u>x [Additional LX-16A Serial Bus Servo](https://www.amazon.com/LewanSoul-Real-Time-Feedback-Bearing-Brackets/dp/B0748BQ49M) (for those who do not take the lecture)
+  - <u>**1**</u>x [Battery Pack](https://www.amazon.com/dp/B01M7Z9Z1N) (or any other battery have DC 12V/5V USB Dual Output)  
+  <u>**Warning</u>: This battery may not be able to afford more than 8 servos.**
+  - <u>**1**</u>x [DC to DC Converter](https://www.amazon.com/gp/product/B00BYS9JYA)
+  - <u>**1**</u>x [Raspberry Pi 4](https://www.amazon.com/Raspberry-Model-2019-Quad-Bluetooth/dp/B07TD42S27?th=1)
+  - <u>**1**</u>x [Micro SD Card (For Raspberry Pi system)](https://www.amazon.com/dp/B073JWXGNT?th=1)
+  - <u>**1**</u>x [USB Male to USB C](https://www.amazon.com/Braided-Compatible-Samsung-Portable-Charger/dp/B07HQHL6ZK?th=1)
+  - <u>**1**</u>x [Raspberry Pi Touch Screen](https://www.amazon.com/dp/B0D4DL38MF?ref=ppx_yo2ov_dt_b_fed_asin_title)  
+ <u>**Warning</u>: Please follow the driver installation guidance in the product description to enable it on Raspberry Pi. You may not be able to use  <u>HDMI</u> output if you enable the touch screen. If the touch screen does not work, please delete "LCD- show" floder and install it again.**
+  - <u>**1**</u>x [USB 2.0 Mini Microphone](https://www.amazon.com/dp/B071WH7FC6?ref=ppx_yo2ov_dt_b_fed_asin_title)
+  - <u>**1 pkg**</u>x [M2 M3  Male Female Hex Brass Standoffs Spacers Screws Nuts Kit](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) (We only use M2 here.)
 
 - **AliExpress**  
-  - [3x16xM2 Shoulder Screw](https://www.aliexpress.us/item/3256806009271581.html?spm=a2g0o.order_list.order_list_main.10.12f01802Rwg7LO&gatewayAdapt=glo2usa) Quantity required: <u>**8**</u>
+  - <u>**8**</u>x [3x16xM2 Shoulder Screw ](https://www.aliexpress.us/item/3256806009271581.html?spm=a2g0o.order_list.order_list_main.10.12f01802Rwg7LO&gatewayAdapt=glo2usa)
 
 
 - **McMaster**  
   - [Screws Set - Example Link](https://mcmaster.com/example1)  
   - [Bearings Set - Example Link](https://mcmaster.com/example2)  
 
+#### Assembly Tips 
 ---
 
 ### Control Code  
@@ -78,9 +79,9 @@ Here is a directory of purchase links for essential parts:
  - speech_recognition (for voice recognition)
  - Pygame (for screen facial expression)
 #### Testing Code
- - servo-test.py
+ - servo-test.py  
     Visualized servo adjusting code.
- - test_hello-world.py
+ - test_hello-world.py  
     3 servos sinusoidal testing code.
 
 ---
