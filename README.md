@@ -1,7 +1,7 @@
 # Robot Studio (2024 Fall) Full Project Implementation  
 It is a bipedal robot implementation for Columbia MECE 4611 Robotics Studio created by ***Zewen "Anthony" Chen*** and ***Xinhe "Carl" Yang*** (Fall 2024).
 
-For those who attend Robotics Studio in the future or want to build their own first bipedal robot, I hope this implementation can help you. But remember, it is far from perfect. **So, do not just copy it, make it better!**  
+For those who attend Robotics Studio in the future or want to build their own first bipedal robot, I hope this implementation can help you. But remember, it is far from perfect. <u>**So, do not just copy it, make it better!**</u>  
 
 Best wishes,  
 Anthony Chen  
