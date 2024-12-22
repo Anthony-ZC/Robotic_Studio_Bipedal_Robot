@@ -6,8 +6,6 @@ For those who attend Robotics Studio in the future or want to build their own fi
 Best wishes,  
 Anthony Chen  
 
-<u>**You may use it for anything other than commercial purposes as long as the citation is noted.**</u>  
-
 ---
 
 ### Project Overview
