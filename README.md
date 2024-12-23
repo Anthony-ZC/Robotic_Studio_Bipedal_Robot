@@ -29,16 +29,18 @@ Anthony Chen
   - [ ] Assembly Video in CAD  
   Probably won't do it anytime soon, I think a good robotics engineer should be capable of analyzing and assembling this robot (or just because I am lazy >_<). But if enough requests are posted in issues, perhaps I'll make it.
 
-- [**Control Code**](#control-code)
+- [**Control**](#control)
   - [x] [Requirements](#requirements)
   - [x] [Testing Code](#testing-code)
   - [x] [Servo Curve Analysis](#servo-curve-analysis)
   - [x] [Integrated Control Code](#integrated-control-code)
 
-- **Simulation Code**
-  - [ ] STL
-  - [ ] URDF
-  - [ ] Physical Properties
+- [**Simulation**](#simulation)
+  - [x] [Extra Requirements](#extra-requirements)
+  - [ ] [Equivalent Series Structure Simplification](#equivalent-series-structure-simplification)
+  - [x] STL & URDF: 
+  [12cm Upeer Legs](./Simulation/model/) 
+  [8cm Upeer Legs](./Simulation/model8/)
   - [ ] Simulation Code
 ---
 ### Assembly Guidance
@@ -74,15 +76,15 @@ Anthony Chen
   - <u>**4**</u> [3 mm Shoulder Diameter, 25 mm Shoulder Length, M2 x 0.4 mm Thread Alloy Steel Shoulder Screws](https://www.mcmaster.com/92981A775/)  
 #### Additional Assembly Information 
   - For 3D-printed ***"Robot_Cover"*** part, you need to do **thermal insert** through the soldering iron.
-  - For ***"Cylinder_Pi"*** and ***"Cylinder_DC_Converter"*** parts in CAD, **do not 3D print it**, use [M2 studs](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) above instead. We have tried 3D print studs with thermal inserts but failed, that's why they are not included in 3D Printing files.
+  - For ***"Cylinder_Pi"*** and ***"Cylinder_DC_Converter"*** parts in CAD, **do not 3D print it**, use [M2 studs](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) above instead. I have tried 3D print studs with thermal inserts but failed, that's why they are not included in 3D Printing files.
   - In Solidworks CAD, you may see **Internal-Tooth Lock Washer** for mating convenience in Solidworks. However, you can use other less damaging lock washers like [Split Lock Washer](https://www.mcmaster.com/92148A050/) instead.
   - For ***"Raspberry_Pi_Platform"*** part, you can use **laser cut acrylic sheets** to get it instead of 3D printing
   - Although the screws that connect the ***"Raspberry Pi"***, the ***"Raspberry_Pi_Platform"***, the ***"Servo_Connector_Head"***, and the ***"studs that hold the DC converter"*** in place in CAD do not use a **lock washer,** it is highly recommended that you use one in order to prevent parts from falling out of place during the robot's motion.
   - **Very Important!** Make sure you print two legs using **same filaments**, or the robot might hard to balance (like [this](https://youtu.be/c0_l959v7TQ?si=rPd1EVJWCl6EjpbT)).
-  - Although the 8cm shorter upper legs are included in this project and the [simulation](https://youtu.be/Yh0ZwXFP5J8?si=DioH9wF-7lgsMUER) shows it somehow better, we failed to make the robot walk using them. But, you can try.
+  - Although the 8cm shorter upper legs are included in this project and the [simulation](https://youtu.be/Yh0ZwXFP5J8?si=DioH9wF-7lgsMUER) shows it somehow better, I failed to make the robot walk using them. But, you can try.
 ---
 
-### Control Code  
+### Control  
 #### Requirements
  - Python 3.10.15+ (To install PyLX-16A package, you must use a Python environment with 3.10 or newer version.)
  - [PyLX-16A](https://github.com/ethanlipson/PyLX-16A/tree/master) 
@@ -121,6 +123,14 @@ This integrated control code is used to provide basic control of the project's b
     ```
     robot = Robot(7, 'keyboard', False)
     ```
-
-    
 ---
+### Simulation  
+#### Extra Requirements
+ - Visual Studio 2022+ (for supporting pybullet simulation)
+ - Pybullet 3.2.6+ (for simulation)
+### Equivalent Series Structure Simplification
+#### STL & URDF
+- In the "Simulation" folder, I provide 2 URDF files and the associated STL files. The "model" folder is for the original size upper leg (12cm) and the "model8" folder is for the short upper leg (8cm). 
+- In URDF, for the inertial parameter part of the connecting rod, the weight was measured by weighing each part individually on an electronic scale with an accuracy of 1g, and the center of mass and inertia were measured by using Mass Properties in the Solidworks Evaluate option.
+- Due to possible variations in the print material, I recommend that you reweigh the individual parts of your robot.
+- You can see my definition of the coordinate system and key rotation axes in the SLDASM assembly file in [GrabCAD](https://grabcad.com/library/robotics-studio-bipedal-robot-1) with a for_simulation suffix.
