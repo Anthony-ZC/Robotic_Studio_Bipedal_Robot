@@ -1,7 +1,8 @@
+import pybullet as p
+import time
+import pybullet_data
+from math import sin
 import numpy as np
-import matplotlib.pyplot as plt
-from math import ceil
-
 
 def cubic_polynomial(ps,ts,extra_velocity_constraint,extra_acceleration_constraint,constraint_type = 'end'):
     """
@@ -132,29 +133,32 @@ def cubic_polynomial_periodic(ps,ts):
     for i in range(len(ps)-2):
         y[2*i+1] = y[2*i+2] = ps[i+1]
         
-    return np.linalg.inv(A) @ y 
+    return np.linalg.inv(A) @ y
+
+# set the initial position of the robot
+offset =  13
+
+# Walk parameters
+walk_period = 40
+Ts = walk_period/4.
+walk_wait_time = 200
+
+# time to stop (unused here)
+stop_time = 3
 
 # 1: servo1, 2: servo2, 3: servo3, 4: servo4, 5: servo5, 6: servo6, 7: servo7
 curve_properties = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
-q = [[], [], [], [], [], [], [], [], [], []]
-
-# Walk parameters
-walk_period = 0.8
-Ts = walk_period/4.
-walk_wait_time = 0
-# time to stop
-stop_time = 3
 
 # Stand up pose
-pose_stand_up = [112.32, 125, 105.80, 116.88, 108.00, 143.28, 100]
+pose_stand_up = [0, offset, -offset, 0, offset, -offset, 0]  
 
 # Walk pose
-walk_pose = {'left_font': {2:130.56, 3:96.96},
-                    'left_back': {2:111.60, 3:116.88},
-                    'left_trainsition': {2:111.60, 3:96.96},
-                    'right_font': {5:97.92, 6:153.84},
-                    'right_back': {5:119.28, 6:132.24},
-                    'right_trainsition': {5:116.40, 6:153.36}}
+walk_pose = {'left_font': {2:-10+offset, 3:0-offset},
+                    'left_back': {2:10+offset, 3:0-offset},
+                    'left_trainsition': {2:10+offset, 3:-10-offset},
+                    'right_font': {5:-10+offset, 6:0-offset},
+                    'right_back': {5:10+offset, 6:0-offset},
+                    'right_trainsition': {5:10+offset, 6:-10-offset}}
 
 # Cubic polynomial for walking
 p2_walk = [walk_pose['left_font'][2], walk_pose['left_back'][2], walk_pose['left_trainsition'][2], walk_pose['left_font'][2]]
@@ -195,7 +199,7 @@ c3_prepare = cubic_polynomial(p3_prepare,tl_prepare,c3_start_velocity,c3_start_a
 c5_prepare = cubic_polynomial(p5_prepare,tr_prepare,c5_start_velocity,c5_start_acceleration,constraint_type='end')
 c6_prepare = cubic_polynomial(p6_prepare,tr_prepare,c6_start_velocity,c6_start_acceleration,constraint_type='end')
 
-# In stop, the start velocity and acceleration are constrained
+# In stop, the start velocity and acceleration are constrained (unused here)
 p2_stop = [walk_pose['left_font'][2],pose_stand_up[2-1]]
 p3_stop = [walk_pose['left_font'][3],pose_stand_up[3-1]]
 tl_stop = [2 * Ts]
@@ -211,136 +215,101 @@ c5_stop = cubic_polynomial(p5_stop,tr_stop,c5_start_velocity,c5_start_accelerati
 c6_stop = cubic_polynomial(p6_stop,tr_stop,c6_start_velocity,c6_start_acceleration,constraint_type='start')
 
 # Store the cubic polynomial coefficients
-curve_properties[1] = {'cubic_walk': c2_walk, 'time_stamp': np.cumsum(tl_walk),
+curve_properties[0] = {'cubic_walk': c2_walk, 'time_stamp': np.cumsum(tl_walk),
                                 'cubic_prepare': c2_prepare, 'time_stamp_prepare': np.cumsum(tl_prepare),
                                 'cubic_stop': c2_stop, 'time_stamp_stop': np.cumsum(tl_stop)}
-curve_properties[2] = {'cubic_walk': c3_walk, 'time_stamp': np.cumsum(tl_walk),
+curve_properties[1] = {'cubic_walk': c3_walk, 'time_stamp': np.cumsum(tl_walk),
                                 'cubic_prepare': c3_prepare, 'time_stamp_prepare': np.cumsum(tl_prepare),
                                 'cubic_stop': c3_stop, 'time_stamp_stop': np.cumsum(tl_stop)}
-curve_properties[4] = {'cubic_walk': c5_walk, 'time_stamp': np.cumsum(tr_walk),
+curve_properties[2] = {'cubic_walk': c5_walk, 'time_stamp': np.cumsum(tr_walk),
                                 'cubic_prepare': c5_prepare, 'time_stamp_prepare': np.cumsum(tr_prepare),
                                 'cubic_stop': c5_stop, 'time_stamp_stop': np.cumsum(tr_stop)}
-curve_properties[5] = {'cubic_walk': c6_walk, 'time_stamp': np.cumsum(tr_walk),
+curve_properties[3] = {'cubic_walk': c6_walk, 'time_stamp': np.cumsum(tr_walk),
                             'cubic_prepare': c6_prepare, 'time_stamp_prepare': np.cumsum(tr_prepare),
                             'cubic_stop': c6_stop, 'time_stamp_stop': np.cumsum(tr_stop)}
 
-# Function to calculate the servo angles
-def f(timer2):
+q = [[], [], [], []]
+
+# set up the simulation environment
+physicsClient = p.connect(p.GUI)#or p.DIRECT for non-graphical version
+p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
+p.setGravity(0,0,-9.81)
+
+# load the robot and the ground
+groundId = p.loadURDF("plane.urdf")
+
+# load the robot
+robotStartPos = [0,0,0.25]
+robotStartOrientation = p.getQuaternionFromEuler([0,0,0])
+robotId = p.loadURDF("model\myrobot_series.urdf",robotStartPos, robotStartOrientation,useFixedBase=False)
+mode = p.POSITION_CONTROL
+
+v = []
+
+
+
+for i in range (10000):
+    q=[]
+    # Stand up phase
+    if i <= walk_wait_time:
+        q = [offset*np.pi/180, -offset*np.pi/180, offset*np.pi/180, -offset*np.pi/180]
+
     # Prepare phase
-    if timer2 < walk_prepare_time:
-        t = timer2
-        for i in range(7):
-            if curve_properties[i] == {}:
+    elif  i <  walk_prepare_time + walk_wait_time:
+        t = i - walk_wait_time
+        for k in range(4):
+            if curve_properties[k] == {}:
                 continue
-            if t <= curve_properties[i]['time_stamp_prepare'][0]:
+            if t <= curve_properties[k]['time_stamp_prepare'][0]:
                 circle_t = t
-                q_i = curve_properties[i]['cubic_prepare'][0] * circle_t**3 + curve_properties[i]['cubic_prepare'][1] * circle_t**2 + curve_properties[i]['cubic_prepare'][2] * circle_t + curve_properties[i]['cubic_prepare'][3]
-            elif t <= curve_properties[i]['time_stamp_prepare'][1]:
-                circle_t = t - curve_properties[i]['time_stamp_prepare'][0]
-                q_i = curve_properties[i]['cubic_prepare'][4] * circle_t**3 + curve_properties[i]['cubic_prepare'][5] * circle_t**2 + curve_properties[i]['cubic_prepare'][6] * circle_t + curve_properties[i]['cubic_prepare'][7]
-            q[i].append(q_i[0])
+                q_i = curve_properties[k]['cubic_prepare'][0] * circle_t**3 + curve_properties[k]['cubic_prepare'][1] * circle_t**2 + curve_properties[k]['cubic_prepare'][2] * circle_t + curve_properties[k]['cubic_prepare'][3]
+            elif t <= curve_properties[k]['time_stamp_prepare'][1]:
+                circle_t = t - curve_properties[k]['time_stamp_prepare'][0]
+                q_i = curve_properties[k]['cubic_prepare'][4] * circle_t**3 + curve_properties[k]['cubic_prepare'][5] * circle_t**2 + curve_properties[k]['cubic_prepare'][6] * circle_t + curve_properties[k]['cubic_prepare'][7]
+            q.append(q_i*np.pi/180)
+    else:
+        # W
+        t = (i - walk_prepare_time - walk_wait_time) % walk_period
+        for k in range(4):
+            if curve_properties[k] == {}:
+                continue
+            if t <= curve_properties[k]['time_stamp'][0]:
+                circle_t = t
+                q_i = curve_properties[k]['cubic_walk'][0] * circle_t**3 + curve_properties[k]['cubic_walk'][1] * circle_t**2 + curve_properties[k]['cubic_walk'][2] * circle_t + curve_properties[k]['cubic_walk'][3]
+            elif t <= curve_properties[k]['time_stamp'][1]:
+                circle_t = t - curve_properties[k]['time_stamp'][0]
+                q_i = curve_properties[k]['cubic_walk'][4] * circle_t**3 + curve_properties[k]['cubic_walk'][5] * circle_t**2 + curve_properties[k]['cubic_walk'][6] * circle_t + curve_properties[k]['cubic_walk'][7]
+            elif t <= curve_properties[k]['time_stamp'][2]:
+                circle_t = t - curve_properties[k]['time_stamp'][1]
+                q_i = curve_properties[k]['cubic_walk'][8] * circle_t**3 + curve_properties[k]['cubic_walk'][9] * circle_t**2 + curve_properties[k]['cubic_walk'][10] * circle_t + curve_properties[k]['cubic_walk'][11]
+            q.append(q_i*np.pi/180)
 
-        return
-    
-    t = (timer2 - walk_prepare_time) % walk_period
-    # Stop phase
-    if timer2>stop_time:
-        global walk_wait_time
-        if walk_wait_time == 0:
-            walk_wait_time = ceil((timer2 - walk_prepare_time)/walk_period) * walk_period
+    p.setJointMotorControl2(robotId, 2, controlMode=mode, targetPosition=q[0])
+    p.setJointMotorControl2(robotId, 3, controlMode=mode, targetPosition=q[1])
+    p.setJointMotorControl2(robotId, 6, controlMode=mode, targetPosition=q[2])
+    p.setJointMotorControl2(robotId, 7, controlMode=mode, targetPosition=q[3])
 
-        if timer2 > walk_prepare_time + walk_wait_time and timer2 < walk_prepare_time + walk_wait_time + walk_stop_time:
-            t = timer2 - walk_prepare_time - walk_wait_time  - 1e-5
-            for i in range(7):
-                if curve_properties[i] == {}:
-                    continue
-                if t <= curve_properties[i]['time_stamp_stop'][0]:
-                    circle_t = t
-                    q_i = curve_properties[i]['cubic_stop'][0] * circle_t**3 + curve_properties[i]['cubic_stop'][1] * circle_t**2 + curve_properties[i]['cubic_stop'][2] * circle_t + curve_properties[i]['cubic_stop'][3]
-                elif t <= curve_properties[i]['time_stamp_stop'][1]:
-                    circle_t = t - curve_properties[i]['time_stamp_stop'][0]
-                    q_i = curve_properties[i]['cubic_stop'][4] * circle_t**3 + curve_properties[i]['cubic_stop'][5] * circle_t**2 + curve_properties[i]['cubic_stop'][6] * circle_t + curve_properties[i]['cubic_stop'][7]
-                q[i].append(q_i[0])
-            return
-        elif timer2 >= walk_prepare_time + walk_wait_time + walk_stop_time:
-            t = walk_stop_time
-            for i in range(7):
-                if curve_properties[i] == {}:
-                    continue
-                if t <= curve_properties[i]['time_stamp_stop'][0]:
-                    circle_t = t
-                    q_i = curve_properties[i]['cubic_stop'][0] * circle_t**3 + curve_properties[i]['cubic_stop'][1] * circle_t**2 + curve_properties[i]['cubic_stop'][2] * circle_t + curve_properties[i]['cubic_stop'][3]
-                elif t <= curve_properties[i]['time_stamp_stop'][1]:
-                    circle_t = t - curve_properties[i]['time_stamp_stop'][0]
-                    q_i = curve_properties[i]['cubic_stop'][4] * circle_t**3 + curve_properties[i]['cubic_stop'][5] * circle_t**2 + curve_properties[i]['cubic_stop'][6] * circle_t + curve_properties[i]['cubic_stop'][7]
-                q[i].append(q_i[0])
-            return
-        
-    # Periodic walking phase
-    for i in range(7):
-        if curve_properties[i] == {}:
-            continue
-        if t <= curve_properties[i]['time_stamp'][0]:
-            circle_t = t
-            q_i = curve_properties[i]['cubic_walk'][0] * circle_t**3 + curve_properties[i]['cubic_walk'][1] * circle_t**2 + curve_properties[i]['cubic_walk'][2] * circle_t + curve_properties[i]['cubic_walk'][3]
-        elif t <= curve_properties[i]['time_stamp'][1]:
-            circle_t = t - curve_properties[i]['time_stamp'][0]
-            q_i = curve_properties[i]['cubic_walk'][4] * circle_t**3 + curve_properties[i]['cubic_walk'][5] * circle_t**2 + curve_properties[i]['cubic_walk'][6] * circle_t + curve_properties[i]['cubic_walk'][7]
-        elif t <= curve_properties[i]['time_stamp'][2]:
-            circle_t = t - curve_properties[i]['time_stamp'][1]
-            q_i = curve_properties[i]['cubic_walk'][8] * circle_t**3 + curve_properties[i]['cubic_walk'][9] * circle_t**2 + curve_properties[i]['cubic_walk'][10] * circle_t + curve_properties[i]['cubic_walk'][11]
-        q[i].append(q_i[0])
+    p.setJointMotorControl2(robotId, 4, controlMode=mode, targetPosition=-q[0]-q[1])
+    p.setJointMotorControl2(robotId, 8, controlMode=mode, targetPosition=-q[2]-q[3])
 
-# Calculate the walking period
-w = ceil((stop_time - walk_prepare_time)/walk_period) * walk_period
+    p.setJointMotorControl2(robotId, 1, controlMode=mode, targetPosition=0)
+    p.setJointMotorControl2(robotId, 5, controlMode=mode, targetPosition=0)
 
-# Calculate the servo angles
-tg = np.arange(0,5,0.01)
-for a in tg:
-    f(a)
-# Plot the servo angles
-fig, axs = plt.subplots(4, 1, figsize=(8, 12), sharex=True)
+    p.stepSimulation()
 
-# Plot the servo angles of servo2, servo3, servo5, servo6
-axs[0].plot(tg, q[1], color='blue', label='servo2')
-axs[0].set_ylabel('servo angles (degrees)')
-axs[0].set_ylim(85, 185) 
-axs[0].legend()
-axs[0].grid()
-# Plot the vertical lines for the prepare phase, walking period and stop phase
-axs[0].vlines(x=[walk_prepare_time,stop_time,w + walk_prepare_time, w + walk_prepare_time + walk_stop_time],  ymin=90, ymax=180, colors=['y', 'g', 'b','r'], linestyles='--')
-# Plot the horizontal lines for the key waypoints
-for c in [*p2_prepare,*p2_walk]:
-    axs[0].axhline(y=c, color='r', linestyle='--')
+    # get the linear velocity of the robot
+    linear_velocity, angular_velocity = p.getBaseVelocity(robotId)
 
-axs[1].plot(tg, q[2], color='green', label='servo3')
-axs[1].set_ylabel('servo angles (degrees)')
-axs[1].set_ylim(85, 185)
-axs[1].legend()
-axs[1].grid()
-axs[1].vlines(x=[walk_prepare_time,stop_time,w + walk_prepare_time, w + walk_prepare_time + walk_stop_time],  ymin=90, ymax=180, colors=['y', 'g', 'b','r'], linestyles='--')
-for c in [*p3_prepare,*p3_walk]:
-    axs[1].axhline(y=c, color='r', linestyle='--')
+    # calculate the average linear velocity every 200 steps
+    if (i+1)%200 != 0:
+        v.append(np.linalg.norm(linear_velocity[0])*100)
+    else:
+        print("Linear Velocity:", sum(v)/len(v), "cm/s")
+        v = []
 
-axs[2].plot(tg, q[4], color='red', label='servo5')
-axs[2].set_ylabel('servo angles (degrees)')
-axs[2].set_ylim(85, 185)
-axs[2].legend()
-axs[2].grid()
-axs[2].vlines(x=[walk_prepare_time,stop_time,w + walk_prepare_time, w + walk_prepare_time + walk_stop_time],  ymin=90, ymax=180, colors=['y', 'g', 'b','r'], linestyles='--')
+    time.sleep(1./240.)
 
-for c in [*p5_prepare,*p5_walk]:
-    axs[2].axhline(y=c, color='r', linestyle='--')
 
-axs[3].plot(tg, q[5], color='purple', label='servo6')
-axs[3].set_ylabel('servo angles (degrees)')
-axs[3].set_ylim(85, 185)
-axs[3].set_xlabel('Time (s)')
-axs[3].legend()
-axs[3].grid()
-axs[3].vlines(x=[walk_prepare_time,stop_time,w + walk_prepare_time, w + walk_prepare_time + walk_stop_time],  ymin=90, ymax=180, colors=['r', 'g', 'b'], linestyles='--')
-for c in [*p6_prepare,*p6_walk]:
-    axs[3].axhline(y=c, color='r', linestyle='--')
-    
-plt.tight_layout()
-plt.show()
+robotPos, robotOrn = p.getBasePositionAndOrientation(robotId)
+print(robotPos, robotOrn)
+p.disconnect()

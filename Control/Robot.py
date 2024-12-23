@@ -9,8 +9,10 @@ import speech_recognition as sr
 
 def cubic_polynomial(ps,ts,extra_velocity_constraint,extra_acceleration_constraint,constraint_type = 'end'):
     """
-    Calculate the cubic polynomial coefficients for the given waypoints and time stamps and constraints.
-
+    Calculate the cubic polynomial coefficients for the given waypoints and time stamps and constraints, which ensures the continuity of the velocity and acceleration at the waypoints.
+    Extra zero constraints are added to the velocity and acceleration at the end or start of the waypoints.
+    Solution is obtained by solving a linear system of equations.
+    
     Args:
         ps (list): list of waypoints
         ts (list): list of time stamps
@@ -25,7 +27,8 @@ def cubic_polynomial(ps,ts,extra_velocity_constraint,extra_acceleration_constrai
     
     n = len(ps)-1
     A =  np.zeros((n*4,n*4))
-
+    
+    # Position constraints
     for i in range(n):
         j = i
         A[i*2,j*4] = A[i*2,j*4+1] = A[i*2,j*4+2] = 0
@@ -35,26 +38,28 @@ def cubic_polynomial(ps,ts,extra_velocity_constraint,extra_acceleration_constrai
         A[i*2+1,j*4+1] = ts[j]**2
         A[i*2+1,j*4+2] = ts[j]
         A[i*2+1,j*4+3] = 1
-
+    # Velocity constraints
     for i in range(2*n,3*n-1):
         j = i -2*n
         A[i,j*4] = 3 * ts[j]**2
         A[i,j*4+1] = 2 * ts[j]
         A[i,j*4+2] = 1
         A[i,j*4+6] = -1
-
+    # Acceleration constraints
     for i in range(3*n,4*n-1):
         j = i -3*n
         A[i,j*4] = 6 * ts[j]
         A[i,j*4+1] = 2 
         A[i,j*4+5] = -2
     
+    # Waypoints' position
     y =  np.zeros((n*4,1))
     y[0] = ps[0]
     y[2*n-1] = ps[-1]
     for i in range(len(ps)-2):
         y[2*i+1] = y[2*i+2] = ps[i+1]
-
+        
+    # Extra constraints
     if constraint_type == 'end':
         A[3*n-1,4*n-4] = 3 * ts[n-1]**2
         A[3*n-1,4*n-3] = 2 * ts[n-1]
@@ -73,7 +78,9 @@ def cubic_polynomial(ps,ts,extra_velocity_constraint,extra_acceleration_constrai
 
 def cubic_polynomial_periodic(ps,ts):
     """
-    Calculate the cubic polynomial coefficients for the given waypoints and time stamps. Extra constraints are added to make the curve periodic (start and end velocity and acceleration are equal).
+    Calculate the cubic polynomial coefficients for the given waypoints and time stamps, which ensures the continuity of the velocity and acceleration at the waypoints.
+    Boundary conditions are periodic, which means the velocity and acceleration at the end and start of the waypoints are equal.
+    Solution is obtained by solving a linear system of equations.
 
     Args:
         ps (list): list of waypoints
@@ -87,6 +94,7 @@ def cubic_polynomial_periodic(ps,ts):
     n = len(ps)-1
     A =  np.zeros((n*4,n*4))
 
+    # Position constraints
     for i in range(n):
         j = i
         A[i*2,j*4] = A[i*2,j*4+1] = A[i*2,j*4+2] = 0
@@ -97,6 +105,7 @@ def cubic_polynomial_periodic(ps,ts):
         A[i*2+1,j*4+2] = ts[j]
         A[i*2+1,j*4+3] = 1
 
+    # Velocity constraints
     for i in range(2*n,3*n-1):
         j = i -2*n
         A[i,j*4] = 3 * ts[j]**2
@@ -109,6 +118,7 @@ def cubic_polynomial_periodic(ps,ts):
     A[3*n-1,4*n-3] = 2 * ts[n-1]
     A[3*n-1,4*n-2] = 1
 
+    # Acceleration constraints
     for i in range(3*n,4*n-1):
         j = i -3*n
         A[i,j*4] = 6 * ts[j]
@@ -119,6 +129,7 @@ def cubic_polynomial_periodic(ps,ts):
     A[4*n-1,4*n-4] = 6 * ts[n-1]
     A[4*n-1,4*n-3] = 2
     
+    # Waypoints' position
     y =  np.zeros((n*4,1))
     y[0] = ps[0]
     y[2*n-1] = ps[-1]

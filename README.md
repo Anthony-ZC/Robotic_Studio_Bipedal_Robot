@@ -37,11 +37,11 @@ Anthony Chen
 
 - [**Simulation**](#simulation)
   - [x] [Extra Requirements](#extra-requirements)
-  - [ ] [Equivalent Series Structure Simplification](#equivalent-series-structure-simplification)
-  - [x] STL & URDF: 
+  - [x] [Equivalent Series Structure Simplification](#equivalent-series-structure-simplification)
+  - [x] [STL & URDF](#stl--urdf): 
   [12cm Upeer Legs](./Simulation/model/) 
   [8cm Upeer Legs](./Simulation/model8/)
-  - [ ] Simulation Code
+  - [x] [Simulation Code](#simulation-code)
 ---
 ### Assembly Guidance
 #### Purchase Links for Essential Parts
@@ -94,17 +94,18 @@ Anthony Chen
  - SpeechRecognition (for voice recognition)
  - Pygame (for screen facial expression)
 #### Testing Code
- - **servo-test.py**  
+ - [**servo-test.py**](./Control/servo-test.py)  
     Visualized servo adjusting code.
- - **test_hello-world.py**  
+ - [**test_hello-world.py**](./Control/test_hello-world.py)  
     3 servos sinusoidal testing code.
 #### Servo Curve Analysis
- - **servo_curve_visualization.py**
+ - [**servo_curve_visualization.py**](./Control/servo_curve_visualization.py)  
     By setting the walk period and servo keyframes, you can plot the servo angle curves of preparation phase, periodic walk phase, and stop phase obtained by cubic polynomial interpolation. Accordingly you can check the servos for excessive overshooting and thus avoid violent shaking or damage to the robot.
 #### Integrated Control Code
- - **Robot.py**  
  
 The integration control code is essentially designed to run on a Raspberry Pi although it can also be used by connecting the servo controller usb cable to a computer. Therefore, before you use this integrated control code, **it is highly recommended that you learn how to control the Raspberry Pi wirelessly using Remote Desktop.** You can follow this video 👉 [Raspberry Pi Headless Setup](https://youtu.be/dhY8m_Eg5iU?si=XMZ2caKZ6iJjB2I0) to install xrdp on Raspberry Pi and use **Windows Remote Connection** on the laptop.
+
+ - [**Robot.py**](./Control/Robot.py)  
 
 This integrated control code is used to provide basic control of the project's bipedal robot. It includes the following main functions:  
 1. wake up the robot, control the robot to switch between homing and standing poses
@@ -140,3 +141,25 @@ The joint angle Equivalent Series Structure Simplification has following relatio
 - In the "Simulation" folder, I provide 2 URDF files and the associated STL files. The "model" folder is for the original size upper leg (12cm) and the "model8" folder is for the short upper leg (8cm). 
 - In URDF, for the inertial parameter part of the connecting rod, the weight was measured by weighing each part individually on an electronic scale with an accuracy of 1g, and the center of mass and inertia were measured by using Mass Properties in the Solidworks Evaluate option. Due to possible variations in the print material, I recommend that you reweigh the individual parts of your robot.
 - You can see my definition of the coordinate system and key rotation axes in the SLDASM assembly files with "for_simulation" suffixes in [GrabCAD](https://grabcad.com/library/robotics-studio-bipedal-robot-1) .
+#### Simulation Code
+In all simulation codes, models of different lengths of upper legs were loaded by
+original size (12cm):
+```
+robotId = p.loadURDF("model\myrobot_series.urdf",robotStartPos, robotStartOrientation,useFixedBase=False)
+```
+short size (8cm):
+```
+robotId = p.loadURDF("model8\myrobot_series.urdf",robotStartPos, robotStartOrientation,useFixedBase=False)
+```
+In Pybullet, you can use **ctrl+left mouse button** to rotate the view or **ctrl+middle mouse button** to pan the view. Also, if you want to fix the robot in the air for further observation, please make the following settings:
+```
+robotId = p.loadURDF("model\myrobot_series.urdf",robotStartPos, robotStartOrientation,useFixedBase=True)
+```
+ - [**basic_simu.py**](./Simulation/basic_simu.py)
+ The code provides the most basic simulation functionality for loading the ground with robots.
+ - [**sin_walk.py**](./Simulation/sin_walk.py)
+ This code provides the ability to drive the robot to walk using a single sinusoidal curve, which will output the average linear velocity at the endpoints.
+ - [**cubic_walk.py**](./Simulation/cubic_walk.py)
+ This code provides the ability to drive the robot to walk using the same cubic polynomial curve as in the control code, and will output the average line speed at the terminal.
+ - [**jump.py**](./Simulation/jump.py)
+ The code provides the ability to drive a robot to jump using an unequal amplitude sinusoidal signal, which works better in the short upper legs model.
