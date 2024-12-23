@@ -10,7 +10,7 @@ For those who attend Robotics Studio in the future or want to build their own fi
 2. The fact that we don't have the two motors located in the hip joints due to timing issues results in extra weight. If you can make the most of them, the robot should be able to make more gaits and be more stable.
 3. Due to the parallel design of the legs, they are compressed by their own weight and can not be considered as rigid bodies, which makes simulation to reality more difficult, improving the design or replacing the other structures may improve.
 
-<u>**So, do not just copy it, make it better!**</u>  
+### <u>**So, do not just copy it, make it better!**</u>  
 
 Best wishes,  
 Anthony Chen  
