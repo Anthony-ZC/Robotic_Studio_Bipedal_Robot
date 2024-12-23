@@ -26,7 +26,7 @@ Anthony Chen
   - [x] [Purchase Links for Essential Parts](#purchase-links-for-essential-parts)  
   - [x] [Additional Assembly Information](#additional-assembly-information)
   - [ ] Assembly Video in CAD  
-  Probably won't do it anytime soon, I think a good robotics engineer should be capable of analyzing and assembling this robot (or just because I am lazy >_<). But if enough requests are posted in issues, perhaps I'll make it.
+  Probably won't do it anytime soon, I think a good robotics engineer should be capable of analyzing and assembling this robot (or just because I am lazy ╮(╯▽╰)╭). But if enough requests are posted in issues, perhaps I'll make it.
 
 - [**Control**](#control)
   - [x] [Requirements](#requirements)
@@ -55,7 +55,7 @@ Anthony Chen
   - <u>**1**</u> [Micro SD Card ](https://www.amazon.com/dp/B073JWXGNT?th=1)
   - <u>**1**</u> [USB Male to USB C](https://www.amazon.com/Braided-Compatible-Samsung-Portable-Charger/dp/B07HQHL6ZK?th=1)
   - <u>**1**</u> [Raspberry Pi Touch Screen](https://www.amazon.com/dp/B0D4DL38MF?ref=ppx_yo2ov_dt_b_fed_asin_title)  
- <u>**Warning</u>: Please follow the driver installation guidance in the product description to enable it on Raspberry Pi. You may not be able to use  <u>HDMI</u> output if you enable the touch screen. If the touch screen does not work, please delete "LCD- show" floder and install it again.**
+ <u>**Warning</u>: Please follow the driver installation guidance in the product description to enable it on Raspberry Pi. You may not be able to use  <u>HDMI</u> output if you enable the touchscreen. If the touchscreen does not work, please delete "LCD- show" floder and install it again.**
   - <u>**1**</u> [USB 2.0 Mini Microphone](https://www.amazon.com/dp/B071WH7FC6?ref=ppx_yo2ov_dt_b_fed_asin_title)
   - <u>**1 pkg**</u> [Raspberry Pi 4 Heatsink](https://www.amazon.com/dp/B0963BMGFY?ref=ppx_yo2ov_dt_b_fed_asin_title) (The 4mm-thick heatsink in it is perfectly adapted to the touchscreen.)
   - <u>**1 pkg**</u> [M2 M3  Male Female Hex Brass Standoffs Spacers Screws Nuts Kit](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) (We only use M2 here.)
@@ -110,7 +110,7 @@ This integrated control code is used to provide basic control of the project's b
 2. Nodding and Squatting
 3. Cyclic walking using a cubic polynomial with smooth transitions for starting and stopping.
 4. Control the robot using terminal input or voice (microphone required).
-5. Display corresponding facial expressions on the Raspberry Pi touch screen according to different commands.
+5. Display corresponding facial expressions on the Raspberry Pi touchscreen according to different commands.
 6. Periodic servo health check (position, temperature, voltage).  
     
 **Caution**: 
@@ -118,7 +118,7 @@ This integrated control code is used to provide basic control of the project's b
 - The servo angles in the code are intended to be applied to the original size (12cm) upper leg, if you plan to use a shorter 8cm upper leg, please re-measure the servo angle.
 
 **Warning**: 
-- Since the facial expressions was originally intended to be on a Raspberry Pi touch screen, pygame's output screen number is specified as 0. Using this code on a computer may result in an inability to terminate the program. Therefore, please disable this feature when connecting to a computer for use.
+- Since the facial expressions was originally intended to be on a Raspberry Pi touchscreen, pygame's output screen number is specified as 0. However, if you use Remote Desktop to launch the Facial Expression feature on a Raspberry Pi **without** connecting a touchscreen, the Facial Expression display may be redirected to the Remote Desktop and paralyze it. Therefore, please disable this funtion when you are not using a touchscreen on your robot.
     ```
     robot = Robot(7, 'keyboard', False)
     ```
@@ -127,9 +127,15 @@ This integrated control code is used to provide basic control of the project's b
 #### Extra Requirements
  - Visual Studio 2022+ (for supporting pybullet simulation)
  - Pybullet 3.2.6+ (for simulation)
-### Equivalent Series Structure Simplification
+#### Equivalent Series Structure Simplification
+![Explanation Image](Equivalent_Series_Structure_Simplification.png)
+The top left image shows the parallel linkage structure of the legs, where the robot's legs actually consist of three parallelograms. The three pinch angles shown in the image are equal in degrees.
+Thus, we can simplify the original active and multiple passive joints shown in the center image above to the tandem structure shown in the right image above (the translucent parts are suppressed).
+The joint angle Equivalent Series Structure Simplification has following relationship:
+- Joint1(Active) remains unchanged.
+- Joint2(Fake Active) equals original Joint2(Active).
+- Joint3(Fake Active) equals to the negative of Joint1(Fake Active)+Joint2(Fake Active), which mimics the original parallel construction making the foot always parallel to the base.
 #### STL & URDF
 - In the "Simulation" folder, I provide 2 URDF files and the associated STL files. The "model" folder is for the original size upper leg (12cm) and the "model8" folder is for the short upper leg (8cm). 
-- In URDF, for the inertial parameter part of the connecting rod, the weight was measured by weighing each part individually on an electronic scale with an accuracy of 1g, and the center of mass and inertia were measured by using Mass Properties in the Solidworks Evaluate option.
-- Due to possible variations in the print material, I recommend that you reweigh the individual parts of your robot.
-- You can see my definition of the coordinate system and key rotation axes in the SLDASM assembly file in [GrabCAD](https://grabcad.com/library/robotics-studio-bipedal-robot-1) with a for_simulation suffix.
+- In URDF, for the inertial parameter part of the connecting rod, the weight was measured by weighing each part individually on an electronic scale with an accuracy of 1g, and the center of mass and inertia were measured by using Mass Properties in the Solidworks Evaluate option. Due to possible variations in the print material, I recommend that you reweigh the individual parts of your robot.
+- You can see my definition of the coordinate system and key rotation axes in the SLDASM assembly files in [GrabCAD](https://grabcad.com/library/robotics-studio-bipedal-robot-1) with a "for_simulation" suffix.
