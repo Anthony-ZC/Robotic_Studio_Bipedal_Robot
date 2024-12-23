@@ -3,7 +3,7 @@ It is a bipedal robot implementation for Columbia MECE 4611 Robotics Studio crea
 
 ---
 
-### Speak Beforehand
+### Say Beforehand
 
 For those who attend Robotics Studio in the future or want to build their own first bipedal robot, I hope this implementation can help you. But remember, it is far from perfect. Here are drawbacks and suggestions for improvement:
 1. It is relatively heavy, the whole weight reaches close to 1.5 kg. and the weight is not concentrated enough, if you can lighten it and concentrate the mass it should be able to run faster. I think under 1.2kg would be ideal.
