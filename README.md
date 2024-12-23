@@ -134,7 +134,7 @@ Thus, we can simplify the original active and multiple passive joints shown in t
 The joint angle Equivalent Series Structure Simplification has following relationship:
 - Joint1(Active) remains unchanged.
 - Joint2(Fake Active) equals original Joint2(Active).
-- Joint3(Fake Active) equals to the negative of Joint1(Fake Active)+Joint2(Fake Active), which mimics the original parallel construction making the foot always parallel to the base.
+- Joint3(Fake Active) equals to the negative of Joint1(Active)+Joint2(Fake Active), which mimics the original parallel construction making the foot always parallel to the base.
 #### STL & URDF
 - In the "Simulation" folder, I provide 2 URDF files and the associated STL files. The "model" folder is for the original size upper leg (12cm) and the "model8" folder is for the short upper leg (8cm). 
 - In URDF, for the inertial parameter part of the connecting rod, the weight was measured by weighing each part individually on an electronic scale with an accuracy of 1g, and the center of mass and inertia were measured by using Mass Properties in the Solidworks Evaluate option. Due to possible variations in the print material, I recommend that you reweigh the individual parts of your robot.
