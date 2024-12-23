@@ -138,4 +138,4 @@ The joint angle Equivalent Series Structure Simplification has following relatio
 #### STL & URDF
 - In the "Simulation" folder, I provide 2 URDF files and the associated STL files. The "model" folder is for the original size upper leg (12cm) and the "model8" folder is for the short upper leg (8cm). 
 - In URDF, for the inertial parameter part of the connecting rod, the weight was measured by weighing each part individually on an electronic scale with an accuracy of 1g, and the center of mass and inertia were measured by using Mass Properties in the Solidworks Evaluate option. Due to possible variations in the print material, I recommend that you reweigh the individual parts of your robot.
-- You can see my definition of the coordinate system and key rotation axes in the SLDASM assembly files in [GrabCAD](https://grabcad.com/library/robotics-studio-bipedal-robot-1) with a "for_simulation" suffix.
+- You can see my definition of the coordinate system and key rotation axes in the SLDASM assembly files with "for_simulation" suffixes in [GrabCAD](https://grabcad.com/library/robotics-studio-bipedal-robot-1) .
