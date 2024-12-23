@@ -100,9 +100,12 @@ Anthony Chen
     3 servos sinusoidal testing code.
 #### Servo Curve Analysis
  - [**servo_curve_visualization.py**](./Control/servo_curve_visualization.py)  
-    By setting the walk period and servo keyframes, you can plot the servo angle curves of preparation phase, periodic walk phase, and stop phase obtained by cubic polynomial interpolation. Accordingly you can check the servos for excessive overshooting and thus avoid violent shaking or damage to the robot.
+    By setting the walk period and servo keyframes, you can plot the servo angle curves of preparation phase, periodic walk phase, and stop phase obtained by cubic polynomial interpolation. Accordingly you can check the servos for excessive overshooting and thus avoid violent shaking or damage to the robot. 
+    
+The robot in this project uses a keyframe + cubic polynomial interpolation approach for periodic gait planning, taking into account the smooth transitions required for start and termination. This formula ensures continuity of servo position, velocity and acceleration throughout the robot's travel. A simple explanation of the idea is shown in the figure below:
+![Key Frames](Key_Frames_Method_with_Cubic_Polynomials.png)
+For this project I used a system of linear equations to solve for multiple cubic polynomial coefficients simultaneously, which you should be familiar with if you also took the MECS 4603 AppliedRobotics: Algorithm & Software course.
 #### Integrated Control Code
- 
 The integration control code is essentially designed to run on a Raspberry Pi although it can also be used by connecting the servo controller usb cable to a computer. Therefore, before you use this integrated control code, **it is highly recommended that you learn how to control the Raspberry Pi wirelessly using Remote Desktop.** You can follow this video 👉 [Raspberry Pi Headless Setup](https://youtu.be/dhY8m_Eg5iU?si=XMZ2caKZ6iJjB2I0) to install xrdp on Raspberry Pi and use **Windows Remote Connection** on the laptop.
 
  - [**Robot.py**](./Control/Robot.py)  
