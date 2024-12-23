@@ -20,7 +20,6 @@ Anthony Chen
 
 - **3D Printing**  
   - [x] [STL Files](./3D%20Printing/)  
-  - [x] [3MF File](./3D%20Printing/Robot.3mf)  
   - [x] MarkerWorld Link: [https://makerworld.com/zh/models/903789#profileId-863432](https://makerworld.com/zh/models/903789#profileId-863432)  
 
 - **Assembly Guidance**  
