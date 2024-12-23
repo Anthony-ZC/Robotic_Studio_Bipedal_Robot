@@ -120,7 +120,7 @@ The integration control code is essentially designed to run on a Raspberry Pi al
  - [**Robot.py**](./Control/Robot.py)  
 
 This integrated control code is used to provide basic control of the project's bipedal robot. It includes the following main functions:  
-1. wake up the robot, control the robot to switch between homing and standing poses
+1. WWake up the robot, control the robot to switch between homing and standing poses
 2. Nodding and Squatting
 3. Periodic walking using a cubic polynomial with smooth transitions for starting and stopping.
 4. Control the robot using terminal input or voice (microphone required).
