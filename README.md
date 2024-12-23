@@ -13,7 +13,8 @@ Anthony Chen
 - **Project Video**  
   - [x] Playlist Link: [https://www.youtube.com/playlist?list=PLH_mFWdIEgZGXP19iW7NsymILhA3eG9Pi](https://www.youtube.com/playlist?list=PLH_mFWdIEgZGXP19iW7NsymILhA3eG9Pi)  
   - [x] Journey Video:  
-  [![Watch the video](Cover.png)](https://www.youtube.com/watch?v=UUYPjQSJz8M) 
+  
+[![Watch the video](Cover.png)](https://www.youtube.com/watch?v=UUYPjQSJz8M) 
 
 - **CAD**  
   - [x] CAD Link (GrabCAD): [https://grabcad.com/library/robotics-studio-bipedel-robot-1](https://grabcad.com/library/robotics-studio-bipedal-robot-1)  
