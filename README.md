@@ -1,7 +1,16 @@
 # Robot Studio: Bipeda Robot Full Project Implementation  
 It is a bipedal robot implementation for Columbia MECE 4611 Robotics Studio created by ***Zewen "Anthony" Chen*** and ***Xinhe "Carl" Yang*** (Fall 2024). We get inspiration by Yuhang Hu's work [CB-20](https://www.youtube.com/watch?v=Y0fBdpLf9ZI&t=1s) and redesign it.
 
-For those who attend Robotics Studio in the future or want to build their own first bipedal robot, I hope this implementation can help you. But remember, it is far from perfect. <u>**So, do not just copy it, make it better!**</u>  
+---
+
+### Speak Beforehand
+
+For those who attend Robotics Studio in the future or want to build their own first bipedal robot, I hope this implementation can help you. But remember, it is far from perfect. Here are drawbacks and suggestions for improvement:
+1. It is relatively heavy, the whole weight reaches close to 1.5 kg. and the weight is not concentrated enough, if you can lighten it and concentrate the mass it should be able to run faster. I think under 1.2kg would be ideal.
+2. The fact that we don't have the two motors located in the hip joints due to timing issues results in extra weight. If you can make the most of them, the robot should be able to make more gaits and be more stable.
+3. Due to the parallel design of the legs, they are compressed by their own weight and can not be considered as rigid bodies, which makes simulation to reality more difficult, improving the design by replacing the other structures may improve.
+
+<u>**So, do not just copy it, make it better!**</u>  
 
 Best wishes,  
 Anthony Chen  
@@ -101,7 +110,7 @@ Anthony Chen
 #### Servo Curve Analysis
  - [**servo_curve_visualization.py**](./Control/servo_curve_visualization.py)  
     By setting the walk period and servo keyframes, you can plot the servo angle curves of preparation phase, periodic walk phase, and stop phase obtained by cubic polynomial interpolation. Accordingly you can check the servos for excessive overshooting and thus avoid violent shaking or damage to the robot. 
-    
+
 The robot in this project uses a keyframe + cubic polynomial interpolation approach for periodic gait planning, taking into account the smooth transitions required for start and termination. This formula ensures continuity of servo position, velocity and acceleration throughout the robot's travel. A simple explanation of the idea is shown in the figure below:
 ![Key Frames](Key_Frames_Method_with_Cubic_Polynomials.png)
 For this project I used a system of linear equations to solve for multiple cubic polynomial coefficients simultaneously, which you should be familiar with if you also took the MECS 4603 AppliedRobotics: Algorithm & Software course.
