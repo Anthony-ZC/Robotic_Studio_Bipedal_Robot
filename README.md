@@ -100,6 +100,27 @@ Anthony Chen
  - **servo_curve_visualization.py**
     By setting the walk period and servo keyframes, you can plot the servo angle curves of preparation phase, periodic walk phase, and stop phase obtained by cubic polynomial interpolation. Accordingly you can check the servos for excessive overshooting and thus avoid violent shaking or damage to the robot.
 #### Integrated Control Code
- - **servo_curve_visualization.py**
-    By setting the walk period and servo keyframes, you can plot the servo angle curves of preparation phase, periodic walk phase, and stop phase obtained by cubic polynomial interpolation. Accordingly you can check the servos for excessive overshooting and thus avoid violent shaking or damage to the robot.
+ - **Robot.py**  
+ 
+The integration control code is essentially designed to run on a Raspberry Pi although it can also be used by connecting the servo controller usb cable to a computer. Therefore, before you use this integrated control code, **it is highly recommended that you learn how to control the Raspberry Pi wirelessly using Remote Desktop.** You can follow this video 👉 [Raspberry Pi Headless Setup](https://youtu.be/dhY8m_Eg5iU?si=XMZ2caKZ6iJjB2I0) to install xrdp on Raspberry Pi and use **Windows Remote Connection** on the laptop.
+
+This integrated control code is used to provide basic control of the project's bipedal robot. It includes the following main functions:  
+1. wake up the robot, control the robot to switch between homing and standing poses
+2. Nodding and Squatting
+3. Cyclic walking using a cubic polynomial with smooth transitions for starting and stopping.
+4. Control the robot using terminal input or voice (microphone required).
+5. Display corresponding facial expressions on the Raspberry Pi touch screen according to different commands.
+6. Periodic servo health check (position, temperature, voltage).  
+    
+**Caution**: 
+- Since voice input has only been tested on the Raspberry Pi, there is no guarantee that this feature will work properly when connected to a computer.
+- The servo angles in the code are intended to be applied to the original size (12cm) upper leg, if you plan to use a shorter 8cm upper leg, please re-measure the servo angle.
+
+**Warning**: 
+- Since the facial expressions was originally intended to be on a Raspberry Pi touch screen, pygame's output screen number is specified as 0. Using this code on a computer may result in an inability to terminate the program. Therefore, please disable this feature when connecting to a computer for use.
+    ```
+    robot = Robot(7, 'keyboard', False)
+    ```
+
+    
 ---
