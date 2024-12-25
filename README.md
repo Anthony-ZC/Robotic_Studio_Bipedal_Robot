@@ -145,7 +145,7 @@ This integrated control code is used to provide basic control of the project's b
 #### Equivalent Series Structure Simplification
 ![Explanation Image](Equivalent_Series_Structure_Simplification.png)
 The top left image shows the parallel linkage structure of the legs, where the robot's legs actually consist of three parallelograms. The three angles (α) shown in the image are equal.
-Thus, we can simplify the original active and multiple passive joints shown in the center image above to the tandem structure shown in the right image above (the translucent parts are suppressed).
+Thus, we can simplify the original active and multiple passive joints shown in the center image above to the series structure shown in the right image above (the translucent parts are suppressed).
 The joint angle Equivalent Series Structure Simplification has following relationship:
 - Joint1(Active) remains unchanged.
 - Joint2(Fake Active) equals original Joint2(Active).
