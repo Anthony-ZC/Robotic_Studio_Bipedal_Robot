@@ -34,7 +34,7 @@ Anthony Chen
 
 - **Assembly Guidance**  
   - [x] [Purchase Links for Essential Parts](#purchase-links-for-essential-parts)  
-  - [x] [Additional Assembly Information](#additional-assembly-information) **$${\color{red}Very \enspace Important!\enspace It \enspace contains \enspace many \enspace important \enspace lessons \enspace from \enspace my \enspace experience,\enspace so\enspace be\enspace sure\enspace to\enspace check\enspace them\enspace out!}$$**
+  - [x] [Additional Assembly Information](#additional-assembly-information) **$${\color{red}\enspace It \enspace contains \enspace many \enspace important \enspace lessons \enspace from \enspace my \enspace experience,\enspace so\enspace be\enspace sure\enspace to\enspace check\enspace them\enspace out!}$$**
   - [ ] Assembly Video in CAD  
   Probably won't do it anytime soon, I think a good robotics engineer should be capable of analyzing and assembling this robot (or just because I am lazy ╮(╯▽╰)╭). But if enough requests are posted in issues, perhaps I'll make it.
 
