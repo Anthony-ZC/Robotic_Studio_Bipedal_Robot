@@ -34,7 +34,7 @@ Anthony Chen
 
 - **Assembly Guidance**  
   - [x] [Purchase Links for Essential Parts](#purchase-links-for-essential-parts)  
-  - [x] [Additional Assembly Information](#additional-assembly-information)
+  - [x] [Additional Assembly Information](#additional-assembly-information) **$${\color{red}Very \enspace Important!\enspace It \enspace contains \enspace many \enspace important \enspace lessons \enspace from \enspace my \enspace experience,\enspace so\enspace be\enspace sure\enspace to\enspace check\enspace them\enspace out!}$$**
   - [ ] Assembly Video in CAD  
   Probably won't do it anytime soon, I think a good robotics engineer should be capable of analyzing and assembling this robot (or just because I am lazy ╮(╯▽╰)╭). But if enough requests are posted in issues, perhaps I'll make it.
 
@@ -59,13 +59,13 @@ Anthony Chen
   - <u>**1★**</u> [LX-16A Serial Bus Servo Controller](https://www.amazon.com/LewanSoul-BusLinker-Debug-Board-LX-16A/dp/B073WRLJB2?ref_=ast_sto_dp)
   - <u>**Extra**</u>[5 Packs LX-16A Serial Bus Servo with Servo Controller Kits](https://www.amazon.com/Hiwonder-LX-16A-Robotic-Controller-Control/dp/B073XY5NT1) (You can buy servos and controller separately or this kit and 2 extra servos.)
   - <u>**1★**</u> [Battery Pack](https://www.amazon.com/dp/B01M7Z9Z1N) (You may use any other battery have DC 12V/5V USB dual output.)  
-  <u>**Warning</u>: This battery may not be able to afford more than 8 servos.**
+  **$${\color{red}Warning:}$$** **This battery may not be able to afford more than 8 servos.**
   - <u>**1★**</u> [DC to DC Converter](https://www.amazon.com/gp/product/B00BYS9JYA)
   - <u>**1★**</u> [Raspberry Pi 4](https://www.amazon.com/Raspberry-Model-2019-Quad-Bluetooth/dp/B07TD42S27?th=1)
   - <u>**1★**</u> [Micro SD Card ](https://www.amazon.com/dp/B073JWXGNT?th=1)
   - <u>**1★**</u> [USB Male to USB C](https://www.amazon.com/Braided-Compatible-Samsung-Portable-Charger/dp/B07HQHL6ZK?th=1)
   - <u>**1★**</u> [Raspberry Pi Touch Screen](https://www.amazon.com/dp/B0D4DL38MF?ref=ppx_yo2ov_dt_b_fed_asin_title)  
- <u>**Warning</u>: Please follow the driver installation guidance in the product description to enable it on Raspberry Pi. You may not be able to use  <u>HDMI</u> output if you enable the touchscreen. If the touchscreen does not work, please delete "LCD- show" floder and install it again.**
+ **$${\color{red}Warning:}$$** **Please follow the driver installation guidance in the product description to enable it on Raspberry Pi. You may not be able to use  <u>HDMI</u> output if you enable the touchscreen. If the touchscreen does not work, please delete "LCD- show" floder and install it again.**
   - <u>**1**</u> [USB 2.0 Mini Microphone](https://www.amazon.com/dp/B071WH7FC6?ref=ppx_yo2ov_dt_b_fed_asin_title)
   - <u>**1 pkg**</u> [Raspberry Pi 4 Heatsink](https://www.amazon.com/dp/B0963BMGFY?ref=ppx_yo2ov_dt_b_fed_asin_title) (The 4mm-thick heatsink in it is perfectly adapted to the touchscreen.)
   - <u>**1 pkg**</u> [M2 M3  Male Female Hex Brass Standoffs Spacers Screws Nuts Kit](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) (We only use M2 here.)
@@ -85,13 +85,18 @@ Anthony Chen
  
 ★ This item will be included in the lecture kit if you attend Columbia MECE 4611 Robotics Studio. 
 #### Additional Assembly Information 
+  - **$${\color{red}Very\enspace Important\enspace First!}$$** Make sure you print two legs using **same filaments**, or the robot might hard to balance (like [this](https://youtu.be/c0_l959v7TQ?si=rPd1EVJWCl6EjpbT)).
   - For 3D-printed ***"Robot_Cover"*** part, you need to do **thermal insert** through the soldering iron.
   - For ***"Cylinder_Pi"*** and ***"Cylinder_DC_Converter"*** parts in CAD, **do not 3D print it**, use [M2 studs](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) above instead. I have tried 3D print studs with thermal inserts but failed, that's why they are not included in 3D Printing files.
   - In Solidworks CAD, you may see **Internal-Tooth Lock Washer** for mating convenience in Solidworks. However, you can use other less damaging lock washers like [Split Lock Washer](https://www.mcmaster.com/92148A050/) instead.
   - For ***"Raspberry_Pi_Platform"*** part, you can use **laser cut acrylic sheets** to get it instead of 3D printing
   - Although the screws that connect the ***"Raspberry Pi"***, the ***"Raspberry_Pi_Platform"***, the ***"Servo_Connector_Head"***, and the ***"studs that hold the DC converter"*** in place in CAD do not use a **lock washer,** it is highly recommended that you use one in order to prevent parts from falling out of place during the robot's motion.
-  - **Very Important!** Make sure you print two legs using **same filaments**, or the robot might hard to balance (like [this](https://youtu.be/c0_l959v7TQ?si=rPd1EVJWCl6EjpbT)).
   - Although the 8cm shorter upper legs are included in this project and the [simulation](https://youtu.be/Yh0ZwXFP5J8?si=DioH9wF-7lgsMUER) shows it somehow better, I failed to make the robot walk using them. But, you can try.
+  - **$${\color{blue}Caution:}$$** You may see parts in the CAD model that do not mate well, such as the screw holes for the DC converter, this is because these parts have been updated and we were unable to find the latest CAD file and had to use a similar CAD. therefore, we strongly recommend that you measure them before printing. The following parts are the ones you need to focus on:  
+    1. Servo size and screw spacing (although we were lucky enough to find the official CAD file and confirm that it correctly points out all the dimensions, but just in case)
+    2. Battery size
+    3. DC converter screw hole spacing (we measured with electronic vernier calipers and the print should be in compliance, but it is still recommended that you measure again)
+    4. Servo controller dimensions and board thickness (be sure to re-measure the servo controller retainer if you want to redesign its holder)
 ---
 
 ### Control  
@@ -128,11 +133,11 @@ This integrated control code is used to provide basic control of the project's b
 5. Display corresponding facial expressions on the Raspberry Pi touchscreen according to different commands.
 6. Periodic servo health check (position, temperature, voltage).  
     
-**Caution**: 
+**$${\color{blue}Caution}$$**: 
 - Since voice input has only been tested on the Raspberry Pi, there is no guarantee that this feature will work properly when connected to a computer.
 - The servo angles in the code are intended to be applied to the original size (12cm) upper leg, if you plan to use a shorter 8cm upper leg, please re-measure the servo angle.
 
-**Warning**: 
+**$${\color{red}Warning}$$**: 
 - Since the facial expressions was originally intended to be on a Raspberry Pi touchscreen, pygame's output screen number is specified as 0. However, if you use Remote Desktop to launch the Facial Expression feature on a Raspberry Pi **without** connecting a touchscreen, the Facial Expression display may be redirected to the Remote Desktop and paralyze it. Therefore, please disable this funtion when you are not using a touchscreen on your robot.
     ```
     robot = Robot(7, 'keyboard', False)
