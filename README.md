@@ -85,7 +85,7 @@ Anthony Chen
  
 ★ This item will be included in the lecture kit if you attend Columbia MECE 4611 Robotics Studio. 
 #### Additional Assembly Information 
-  - **$${\color{red}Very\enspace Important\enspace First!}$$** Make sure you print two legs using **same filaments**, or the robot might hard to balance (like [this](https://youtu.be/c0_l959v7TQ?si=rPd1EVJWCl6EjpbT)).
+  - **$${\color{red}Very\enspace Important\enspace First!}$$** Make sure you print two legs using **same kind of filament** (say do not print the left leg with PLA basic and right leg with PLA matte, or even filaments from different brands), or the robot might hard to balance (like [this](https://youtu.be/c0_l959v7TQ?si=rPd1EVJWCl6EjpbT)).
   - For 3D-printed ***"Robot_Cover"*** part, you need to do **thermal insert** through the soldering iron.
   - For ***"Cylinder_Pi"*** and ***"Cylinder_DC_Converter"*** parts in CAD, **do not 3D print it**, use [M2 studs](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) above instead. I have tried 3D print studs with thermal inserts but failed, that's why they are not included in 3D Printing files.
   - In Solidworks CAD, you may see **Internal-Tooth Lock Washer** for mating convenience in Solidworks. However, you can use other less damaging lock washers like [Split Lock Washer](https://www.mcmaster.com/92148A050/) instead.
