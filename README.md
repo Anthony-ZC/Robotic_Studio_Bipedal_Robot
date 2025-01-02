@@ -85,18 +85,21 @@ Anthony Chen
  
 ★ This item will be included in the lecture kit if you attend Columbia MECE 4611 Robotics Studio. 
 #### Additional Assembly Information 
-  - **$${\color{red}Very\enspace Important\enspace First!}$$** Make sure you print two legs using **same kind of filament** (say do not print the left leg with PLA basic and right leg with PLA matte, or even filaments from different brands), or the robot might hard to balance (like [this](https://youtu.be/c0_l959v7TQ?si=rPd1EVJWCl6EjpbT)).
   - For 3D-printed ***"Robot_Cover"*** part, you need to do **thermal insert** through the soldering iron.
   - For ***"Cylinder_Pi"*** and ***"Cylinder_DC_Converter"*** parts in CAD, **do not 3D print it**, use [M2 studs](https://www.amazon.com/dp/B06XCNF6HK?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1) above instead. I have tried 3D print studs with thermal inserts but failed, that's why they are not included in 3D Printing files.
   - In Solidworks CAD, you may see **Internal-Tooth Lock Washer** for mating convenience in Solidworks. However, you can use other less damaging lock washers like [Split Lock Washer](https://www.mcmaster.com/92148A050/) instead.
   - For ***"Raspberry_Pi_Platform"*** part, you can use **laser cut acrylic sheets** to get it instead of 3D printing
   - Although the screws that connect the ***"Raspberry Pi"***, the ***"Raspberry_Pi_Platform"***, the ***"Servo_Connector_Head"***, and the ***"studs that hold the DC converter"*** in place in CAD do not use a **lock washer,** it is highly recommended that you use one in order to prevent parts from falling out of place during the robot's motion.
   - Although the 8cm shorter upper legs are included in this project and the [simulation](https://youtu.be/Yh0ZwXFP5J8?si=DioH9wF-7lgsMUER) shows it somehow better, I failed to make the robot walk using them. But, you can try.
-  - **$${\color{blue}Caution:}$$** You may see parts in the CAD model that do not mate well, such as the screw holes for the DC converter, this is because these parts have been updated and we were unable to find the latest CAD file and had to use a similar CAD. therefore, we strongly recommend that you measure them before printing. The following parts are the ones you need to focus on:  
-    1. Servo size and screw spacing (although we were lucky enough to find the official CAD file and confirm that it correctly points out all the dimensions, but just in case)
-    2. Battery size
-    3. DC converter screw hole spacing (we measured with electronic vernier calipers and the print should be in compliance, but it is still recommended that you measure again)
-    4. Servo controller dimensions and board thickness (be sure to re-measure the servo controller retainer if you want to redesign its holder)
+> [!Caution]
+> **Very Important!:**  Make sure you print two legs using **same kind of filament** (say do not print the left leg with PLA basic and right leg with PLA matte, or even filaments from different brands), or the robot might hard to balance (like [this](https://youtu.be/c0_l959v7TQ?si=rPd1EVJWCl6EjpbT)).
+
+> [!Note]
+>  You may see parts in the CAD model that do not mate well, such as the screw holes for the DC converter, this is because these parts have been updated and we were unable to find the latest CAD file and had to use a similar CAD. therefore, we strongly recommend that you measure them before printing. The following parts are the ones you need to focus on:
+>   1. Servo size and screw spacing (although we were lucky enough to find the official CAD file and confirm that it correctly points out all the dimensions, but just in case)
+>   2. Battery size
+>   3. DC converter screw hole spacing (we measured with electronic vernier calipers and the print should be in compliance, but it is still recommended that you measure again)
+>   4. Servo controller dimensions and board thickness (be sure to re-measure the servo controller retainer if you want to redesign its holder)
 ---
 
 ### Control  
@@ -133,15 +136,15 @@ This integrated control code is used to provide basic control of the project's b
 5. Display corresponding facial expressions on the Raspberry Pi touchscreen according to different commands.
 6. Periodic servo health check (position, temperature, voltage).  
     
-**$${\color{blue}Caution}$$**: 
-- Since voice input has only been tested on the Raspberry Pi, there is no guarantee that this feature will work properly when connected to a computer.
-- The servo angles in the code are intended to be applied to the original size (12cm) upper leg, if you plan to use a shorter 8cm upper leg, please re-measure the servo angle.
+> [!Warning]
+> - Since the facial expressions was originally intended to be on a Raspberry Pi touchscreen, pygame's output screen number is specified as 0. However, if you use Remote Desktop to launch the Facial Expression feature on a Raspberry Pi **without** connecting a touchscreen, the Facial Expression display may be redirected to the Remote Desktop and paralyze it. Therefore, please disable this funtion when you are not using a touchscreen on your robot.
+>   ```
+>    robot = Robot(7, 'keyboard', False)
+>   ```
 
-**$${\color{red}Warning}$$**: 
-- Since the facial expressions was originally intended to be on a Raspberry Pi touchscreen, pygame's output screen number is specified as 0. However, if you use Remote Desktop to launch the Facial Expression feature on a Raspberry Pi **without** connecting a touchscreen, the Facial Expression display may be redirected to the Remote Desktop and paralyze it. Therefore, please disable this funtion when you are not using a touchscreen on your robot.
-    ```
-    robot = Robot(7, 'keyboard', False)
-    ```
+> [!Note]
+> - Since voice input has only been tested on the Raspberry Pi, there is no guarantee that this feature will work properly when connected to a computer.
+> - The servo angles in the code are intended to be applied to the original size (12cm) upper leg, if you plan to use a shorter 8cm upper leg, please re-measure the servo angle.
 ---
 ### Simulation  
 #### Extra Requirements
