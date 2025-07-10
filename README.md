@@ -1,5 +1,5 @@
 # Robot Studio: Bipeda Robot Full Project Implementation  
-It is a bipedal robot implementation for **Columbia MECE 4611 Robotics Studio** created by ***Zewen "Anthony" Chen*** and ***Xinhe "Carl" Yang*** (Fall 2024). We get inspiration by Yuhang Hu's work [CB-20](https://www.youtube.com/watch?v=Y0fBdpLf9ZI&t=1s) and redesign it.
+It is a bipedal robot implementation for **Columbia MECE 4611 Robotics Studio (Fall 2024)** created by ***Zewen "Anthony" Chen*** and ***Xinhe "Carl" Yang*** . We get inspiration by Yuhang Hu's work [CB-20](https://www.youtube.com/watch?v=Y0fBdpLf9ZI&t=1s) and redesign it.
 
 ---
 
